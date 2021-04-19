@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+</head>
+<body style="background:url({% static 'images/rupa.jpg' %});background-size: cover">
+
+    <form action="/showdetails/"method="post">
+        {% csrf_token %}
+
+
+
+        <table align="center" border="0s">
+            <tr>
+                <td>
+                </td>
+            </tr>
+
+            <tr>
+                <th><br>
+                    Registration page
+                    <br><br>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" name="idno" placeholder="Idno" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="name" placeholder="Name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" name="age"min="20"max="60" placeholder="Age"required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" name="contact" placeholder="Contact NO">
+                </td>
+            </tr>
+            <tr>
+                <td>Gender
+                    <input type="radio" name="gender" value="male" checked>Male
+                    <input type="radio" name="gender" value="female">Fe-male
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea name="address" placeholder="Address"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="save"align="center">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <td>
+
+    <table align="center" border="2" bgcolor="#adff2f">
+        <tr bgcolor="yellow">
+            <th width="30">IDNO</th>
+            <th width="30">NAME</th>
+            <th width="30">AGE</th>
+            <th width="30">CONTACTNO</th>
+            <th width="30">GENDER</th>
+            <th width="30">ADRESS</th>
+
+
+            <th width="30">INSERT</th>
+            <th width="30">DELETE</th>
+            <th width="30">UPDATE</th>
+            <th width="30">READ</th>
+
+        </tr>
+
+        {% for x in res%}
+            <tr bgcolor="#ffa7a7">
+                    <th width="50">{{ x.idno }}</th>
+                    <th width="50">{{ x.name }}</th>
+                    <th width="50">{{ x.age}}</th>
+                    <th width="50">{{ x.contactno }}</th>
+                    <th width="50">{{ x.gender }}</th>
+                    <th width="50">{{ x.address }}</th>
+
+
+                    <th width="100"align="center">
+                        <a href="/update{{ result }}/"></a>
+                    <th width="100">
+                    <form action="/update/"method="post">
+                        {% csrf_token %}
+                    <input type="hidden" name="updateid" value={{ x.idno }}>
+                    <input type="submit" value="yes">
+
+                        <a href="/update{{ result }}/"></a>
+                    <th width="100">
+                    <form action="/delete/"method="post">
+                        {% csrf_token %}
+                    <input type="hidden" name="delid" value={{ x.idno }}>
+                    <input type="submit" value="yes">
+
+                         <a href="/update{{ result }}/"></a>
+                    <th width="100">
+                    <form action="/read/"method="post">
+                        {% csrf_token %}
+                    <input type="hidden" name="readid" value={{ x.idno }}>
+                    <input type="submit" value="yes">
+
+                    </form>
+                    </th>
+                    </tr>
+
+                {% endfor %}
+
+    </>
+    </td>
+
+
+
+
+</body>
+</html>
